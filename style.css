@@ -140,9 +140,16 @@ html, body {
 	/* But also accounting for potential margin-bottom of last child */
 	margin-bottom: -60px;
 }
+#nb {
+	text-align: center;
+}
 #groupes{
 	height: 650px;
 	overflow: auto;
+}
+.group{
+	padding: 5px;
+	border: 1px;
 }
 .map {
 	/*padding-right: 5px;*/
