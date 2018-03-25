@@ -61,7 +61,6 @@ function searchWithCodePostal(codePostal) {
 	var host = "https://nominatim.openstreetmap.org/";
 	var route = "/search/?format=json&q=";
 	var url = host + route + codePostal + ",France";
-	console.log(url);
 	$.ajax({
 		url: url,
 		method: 'GET',
@@ -107,7 +106,6 @@ function getPostalCodeFromGeoLoc(lat, lon) {
 function addGroups(items) {
 	$("#nb").append("<div class=\"col-12\" style='text-align: center;'>" + items.length + " groupes trouvés" + "</div>");
 	items.forEach(function (group) {
-		console.log(group);
 		$("#groupes").append(
 			"<div class=\"col-12 wrapper\">"
 				+"<div class=\"col-12 group\">"
