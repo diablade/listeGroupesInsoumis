@@ -7,7 +7,7 @@ var km = 30000;
 var codePostal = 69003;
 var lat = Number("45.728113");
 var lon = Number("4.877817");
-var hostweb = 'https://agir.lafranceinsoumise.fr/groupes/';
+var hostweb = 'https://agir.lafranceinsoumise.fr/';
 
 $(document).ready(function () {
 	//init first search on lyon :P
@@ -16,7 +16,8 @@ $(document).ready(function () {
 
 //INIT params ENDS ---------------------
 function resetGroups() {
-	$('groupes').empty();
+	$('#nb').empty();
+	$('#groupes').empty();
 }
 
 function getUrl() {
@@ -108,10 +109,17 @@ function addGroups(items) {
 	items.forEach(function (group) {
 		console.log(group);
 		$("#groupes").append(
-			"<div class=\"col-12 group pointer\">" +
-				"<a class='col-12 name' href=" + hostweb + group.path + ">" + group.name + "</a>" +
-				"<div class='col-12 contact'>" + group.contact + "</div>" +
-			"</div>"
+			"<div class=\"col-12 wrapper\">"
+				+"<div class=\"col-12 group\">"
+					+"<a class='col-12 name' target=\"_blank\" href=\""+ hostweb + group.path + "\">" + group.name + "</a>"
+					+"<div class='col-12 contact'><b>" + group.contact.name +"</b>, "+group.contact.email + (group.contact.phone? ", "+group.contact.phone : "")+ "</div>"
+					+"<div class='col-12 description'>"+group.description+"</div>"
+					+"<div class=\"row justify-content-around\">"
+						+"<a class='col-4 btn btn-outline-primary btn-sm' target=\"_blank\" href=\""+ hostweb + group.path + "\">"+"voir plus"+"</a>"
+						+"<div class='col-4 btn btn-outline-danger btn-sm' onclick='reloadIframeOnIdEvent("+"\""+group._id+"\""+")'>"+"voir sur la carte"+"</div>"
+					+"</div>"
+				+"</div>"
+			+"</div>"
 		);
 	});
 	document.getElementById("loading").style.display = "none";
@@ -137,6 +145,6 @@ function reloadIframeOnCodePostal(zipcode) {
 
 function reloadIframeOnIdEvent(id) {
 	console.log("reload ifram on event=", id);
-	document.getElementById('mapframe').src = "https://carte.lafranceinsoumise.fr/?&event_id=" + id + ",events";
+	document.getElementById('mapframe').src = "https://carte.lafranceinsoumise.fr/?&event_id=" + id + ",groups";
 }
 
