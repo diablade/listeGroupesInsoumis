@@ -116,7 +116,7 @@ function addGroups(items) {
 			"<div class=\"col-12 wrapper\">"
 				+"<div class=\"col-12 group "+(certif?"certif":"")+"\">"
 					+"<a class='col-12 name' target=\"_blank\" href=\""+ hostweb + group.path + "\">" + group.name + "</a>"
-					+(certif ? "<div style=\"\n" +"color: red;\n"+"\">Certifié</div>":"")
+					+(certif ? "<div class=\"badge\">Certifié</div>":"")
 					+"<div class='col-12 contact'><b>" + group.contact.name +"</b>, "+group.contact.email + (group.contact.phone? ", "+group.contact.phone : "")+ "</div>"
 					+"<div class='col-12 description'>"+group.description+"</div>"
 					+"<div class=\"row justify-content-around\">"

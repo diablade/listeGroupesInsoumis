@@ -180,6 +180,11 @@ html, body {
 .certif{
 	background:#f0f8ff;
 }
+.badge{
+	color:white;
+	background-color: #c9462d;
+	border-radius: 10px;
+}
 #codePostal {
 	padding: 5px;
 	width: inherit;
