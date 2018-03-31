@@ -1,7 +1,9 @@
 //INIT params BEGIN ---------------------
 var data = {};
+var urlinit= "https://api.lafranceinsoumise.fr/legacy/groups/?max_results=100&close_to={\"max_distance\":\"30000\",\"coordinates\":[\"4.877817\",\"45.728113\"]}";
 var host = "https://api.lafranceinsoumise.fr";
 var routeApi = "/legacy/groups/";
+var paramsEmail = "?contact_email=";
 var params1 = "?max_results=100&close_to=";
 var km = 30000;
 var codePostal = 69003;
@@ -11,7 +13,7 @@ var hostweb = 'https://agir.lafranceinsoumise.fr/';
 
 $(document).ready(function () {
 	//init first search on lyon :P
-	getGroups(getUrl());
+	getGroups(urlinit);
 });
 
 //INIT params ENDS ---------------------
@@ -21,86 +23,20 @@ function resetGroups() {
 }
 
 function getUrl() {
-	var coordinates = "[\"" + lon + "\",\"" + lat + "\"]";
-	var params2 = "{\"max_distance\":\"" + km + "\",\"coordinates\":" + coordinates + "}";
-	return host + routeApi + params1 + params2
+	return host + routeApi + paramsEmail;
 }
 
-function getRadioBtnValue() {
-	var radios = document.getElementsByName('optKm');
-	for (var i = 0, length = radios.length; i < length; i++) {
-		if (radios[i].checked) {
-			return radios[i].value;
-		}
-	}
-}
 
-function search(byGeoloc) {
+function search() {
 	document.getElementById("loading").style.display = "block";
 	resetGroups();
-	km = getRadioBtnValue();
-	if (byGeoloc) {
-		if (navigator.geolocation) {
-			navigator.geolocation.getCurrentPosition(searchWithPosition);
-		}
-		else {
-			alert("Geolocation non supporté par votre navigateur");
-		}
+
+	var email = document.getElementById('email').value;
+	if (!email) {
 	}
-	else {
-		codePostal = document.getElementById('codePostal').value;
-		if (!codePostal) {
-			codePostal = "69003";
-		} //by dedault LYON ;)
-		reloadIframeOnCodePostal(codePostal);
-		searchWithCodePostal(codePostal);
+	else{
+		getGroups(getUrl()+email);
 	}
-}
-
-function searchWithCodePostal(codePostal) {
-	var host = "https://nominatim.openstreetmap.org/";
-	var route = "/search/?format=json&q=";
-	var url = host + route + codePostal + ",France";
-	$.ajax({
-		url: url,
-		method: 'GET',
-		dataType: 'json',
-		success: function (data, statut) {
-			if (data) {
-				lat = data[0].lat;
-				lon = data[0].lon;
-				getGroups(getUrl());
-			}
-		}
-	});
-}
-
-function searchWithPosition(position) {
-	lat = position.coords.latitude;
-	lon = position.coords.longitude;
-	getPostalCodeFromGeoLoc(lat, lon);
-	getGroups(getUrl());
-}
-
-function getPostalCodeFromGeoLoc(lat, lon) {
-	var host = "https://nominatim.openstreetmap.org/";
-	var route = "/search/?format=json&q=";
-	var cp = /((2[A|B])|[0-9]{2})[0-9]{3}/;
-	var url = host + route + lat + ',' + lon;
-	$.ajax({
-		url: url,
-		method: 'GET',
-		dataType: 'json',
-		success: function (data, statut) {
-			if (data) {
-				codePostal = data[0].display_name.match(cp)[0];
-				if (!codePostal) {
-					codePostal = "69003";
-				}
-				reloadIframeOnCodePostal(codePostal);
-			}
-		}
-	});
 }
 
 function addGroups(items) {

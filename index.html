@@ -36,29 +36,12 @@
 			<div class="row">
 				<div class="col-12 align-self-center" style="margin-bottom:10px;">
 					<div class="row">
-						Voir les groupes d'action/appuie autour de :
+						Voir les groupes d'action :
 					</div>
 					<div class="row">
-						<form>
-							<label class="radio-inline"><input type="radio" name="optKm" value="1000">1km</label>
-							<label class="radio-inline"><input type="radio" name="optKm" value="2000">2km</label>
-							<label class="radio-inline"><input type="radio" name="optKm" value="5000">5km</label>
-							<label class="radio-inline"><input type="radio" name="optKm" value="10000">10km</label>
-							<label class="radio-inline"><input type="radio" name="optKm" value="15000">15km</label>
-							<label class="radio-inline"><input type="radio" name="optKm" checked
-															   value="30000">30km</label>
-							<label class="radio-inline"><input type="radio" name="optKm" value="50000">50km</label>
-							<label class="radio-inline"><input type="radio" name="optKm" value="100000">100km</label>
-						</form>
-					</div>
-					<div class="row">
-						<button class="col-12 col-sm-3 btn btn-primary" onclick="search(true)"
-								style="margin-bottom: 5px;padding: 5px;">
-							autour de moi
-						</button>
-						<div class="" style="margin: auto;" onclick="resetGroups()">ou par</div>
-						<div class="col-5 col-sm-3" style="padding:0px 5px;margin: auto;">
-							<input id="codePostal" type="text" name="codePostal" placeholder="code postal"/>
+						<div class="" style="margin: auto;" onclick="resetGroups()">par</div>
+						<div class="col-5 col-sm-5" style="padding:0px 5px;margin: auto;">
+							<input id="email" type="text" name="email" placeholder="adresse email"/>
 						</div>
 						<button class="col-4 col-sm-3 btn btn-primary" style="padding:5px;" onclick="search(false)">
 							Rechercher
