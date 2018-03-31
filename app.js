@@ -106,10 +106,17 @@ function getPostalCodeFromGeoLoc(lat, lon) {
 function addGroups(items) {
 	$("#nb").append("<div class=\"col-12\" style='text-align: center;'>" + items.length + " groupes trouvés" + "</div>");
 	items.forEach(function (group) {
+		var certif = false;
+		group.subtypes.forEach(function (subtype){
+			if(subtype === 'certifié'){
+				certif = true;
+			}
+		});
 		$("#groupes").append(
 			"<div class=\"col-12 wrapper\">"
-				+"<div class=\"col-12 group\">"
+				+"<div class=\"col-12 group "+(certif?"certif":"")+"\">"
 					+"<a class='col-12 name' target=\"_blank\" href=\""+ hostweb + group.path + "\">" + group.name + "</a>"
+					+(certif ? "<div style=\"\n" +"color: red;\n"+"\">Certifié</div>":"")
 					+"<div class='col-12 contact'><b>" + group.contact.name +"</b>, "+group.contact.email + (group.contact.phone? ", "+group.contact.phone : "")+ "</div>"
 					+"<div class='col-12 description'>"+group.description+"</div>"
 					+"<div class=\"row justify-content-around\">"

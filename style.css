@@ -165,7 +165,7 @@ html, body {
 .description {
 	text-overflow: ellipsis;
 	font-size: 12px;
-	max-height: 60px;
+	max-height: 100px;
 	overflow: hidden;
 }
 .map {
@@ -177,7 +177,9 @@ html, body {
 	margin-right: 0px;
 	margin-left: 0px;
 }
-
+.certif{
+	background:#f0f8ff;
+}
 #codePostal {
 	padding: 5px;
 	width: inherit;
